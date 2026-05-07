@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import joblib
 import bcrypt
+import os
 
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
@@ -45,7 +46,17 @@ except ConnectionFailure:
 # LOAD MODEL
 # ======================================================
 
-model = joblib.load("../models/churn_model.pkl")
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+MODEL_PATH = os.path.join(
+    BASE_DIR,
+    "..",
+    "models",
+    "churn_model.pkl"
+)
+
+model = joblib.load(MODEL_PATH)
 
 # ======================================================
 # SESSION STATE
